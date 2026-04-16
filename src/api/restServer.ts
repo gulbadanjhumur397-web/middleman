@@ -1113,7 +1113,11 @@ export function startRestApi(port: number = parseInt(process.env.API_PORT || "80
         sakHandler(res, await solanaToolkit.getTokenPrice(req.params.mintOrSymbol));
     });
 
-    app.get('/v1/solana/balance/:mintOrSymbol?', async (req: any, res: any) => {
+    app.get('/v1/solana/balance', async (req: any, res: any) => {
+        sakHandler(res, await solanaToolkit.getBalance());
+    });
+
+    app.get('/v1/solana/balance/:mintOrSymbol', async (req: any, res: any) => {
         sakHandler(res, await solanaToolkit.getBalance(req.params.mintOrSymbol));
     });
 

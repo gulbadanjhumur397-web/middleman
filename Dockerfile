@@ -1,9 +1,9 @@
-FROM node:20-alpine
+FROM node:20-slim
 
 WORKDIR /app
 
 # Install openssl for Prisma, and build tools for native node modules (usb/node-gyp/node-hid)
-RUN apk add --no-cache openssl python3 make g++ linux-headers eudev-dev libusb-dev pkgconfig
+RUN apt-get update && apt-get install -y openssl python3 make g++ libusb-1.0-0-dev libudev-dev pkg-config && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies
 COPY package*.json ./

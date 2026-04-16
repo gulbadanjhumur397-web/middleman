@@ -2,8 +2,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install openssl for Prisma
-RUN apk add --no-cache openssl
+# Install openssl for Prisma, and build tools for native node modules (usb/node-gyp)
+RUN apk add --no-cache openssl python3 make g++ linux-headers eudev-dev
 
 # Install dependencies
 COPY package*.json ./

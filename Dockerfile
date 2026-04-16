@@ -5,6 +5,9 @@ WORKDIR /app
 # Install openssl for Prisma, and build tools for native node modules (usb/node-gyp/node-hid)
 RUN apt-get update && apt-get install -y openssl python3 make g++ libusb-1.0-0-dev libudev-dev pkg-config && rm -rf /var/lib/apt/lists/*
 
+# Hide Prisma Update Warnings in Railway Logs
+ENV PRISMA_HIDE_UPDATE_MESSAGE="true"
+
 # Install dependencies
 COPY package*.json ./
 RUN npm ci --production=false

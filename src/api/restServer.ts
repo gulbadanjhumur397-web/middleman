@@ -1310,13 +1310,16 @@ export function startRestApi(port: number = parseInt(process.env.API_PORT || "80
     app.get('/v1/solana/coingecko/:coinId', async (req: any, res: any) => {
         sakHandler(res, await solanaToolkit.getCoinGeckoPrice(req.params.coinId));
     });
-
     app.get('/v1/solana/trending', async (_req: any, res: any) => {
         sakHandler(res, await solanaToolkit.getTrendingTokens());
     });
 
-    app.get('/v1/solana/top-gainers/:duration?', async (req: any, res: any) => {
-        sakHandler(res, await solanaToolkit.getTopGainers(req.params.duration || '24h'));
+    app.get('/v1/solana/top-gainers', async (_req: any, res: any) => {
+        sakHandler(res, await solanaToolkit.getTopGainers());
+    });
+
+    app.get('/v1/solana/top-gainers/:duration', async (req: any, res: any) => {
+        sakHandler(res, await solanaToolkit.getTopGainers(req.params.duration));
     });
 
     app.get('/v1/solana/latest-pools', async (_req: any, res: any) => {
